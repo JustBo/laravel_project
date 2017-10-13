@@ -1,3 +1,5 @@
+build based on https://laracasts.com/series/laravel-5-fundamentals
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
