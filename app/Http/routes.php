@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Route::get('/about', 'AboutController@get_content');
 Route::get('/articles', 'ArticlesController@get_content');
+Route::get('/articles/create', 'ArticlesController@create');
 Route::get('/articles/{id}', 'ArticlesController@get_specific_article');
+Route::post('/articles', 'ArticlesController@store');
