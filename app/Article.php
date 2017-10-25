@@ -21,6 +21,10 @@ class Article extends Model
     public function setPublishedAtAttribute( $date ){
       $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date);
     }
+    //return lists of ids for the current article
+    public function getCategoriesListAttribute( ){
+      return $this->categories->lists('id')->all();
+    }
 
     public function user(){
       return $this->belongsTo('App\User');

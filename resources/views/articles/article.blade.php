@@ -10,4 +10,12 @@
   <div class="article-published">
     {{ $article->published_at }}
   </div>
+  @unless( $article->categories->isEmpty() )
+    <h4>Categories</h4>
+    <ul>
+      @foreach ($article->categories as $key => $category)
+        <li>{{ $category->name }}</li>
+      @endforeach
+    </ul>
+  @endunless
 @stop

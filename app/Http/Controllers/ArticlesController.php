@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Article;
+use App\Category;
 use Carbon\Carbon;
 use App\Http\Requests\ArticleRequest;
 //use App\Http\Controllers\Auth\AuthController;
@@ -33,23 +34,27 @@ class ArticlesController extends Controller
 
     public function create(){
 
-      return view('articles.create');
+      $categories = Category::lists('name', 'id');
+
+      return view('articles.create', compact('categories'));
 
     }
 
     public function store( ArticleRequest $request ){
 
       //$input = Request::all();
-      $article = new Article( $request->all() );
-      \Auth::user()->articles()->save($article);
+      // $article = new Article( $request->all() );
+      $article = \Auth::user()->articles()->create( $request->all() );
+      $article->categories()->attach( $request->input('categories_list') );
       return redirect('articles');
 
     }
 
     public function edit( $id ){
 
+      $categories = Category::lists('name', 'id');
       $article = Article::findOrFail( $id );
-      return view('articles.edit', compact('article') );
+      return view('articles.edit', compact('article','categories') );
 
     }
 
