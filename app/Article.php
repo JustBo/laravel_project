@@ -13,6 +13,7 @@ class Article extends Model
       'body',
       'published_at'
     ];
+    protected $dates = ['published_at'];
     //filter articles when fetch data   Article::published($value)
     public function scopePublished( $query ){
       $query->where('published_at', '<=', Carbon::now());
@@ -20,6 +21,9 @@ class Article extends Model
     //set date when persist to database
     public function setPublishedAtAttribute( $date ){
       $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date);
+    }
+    public function getPublishedAtAttribute( $date ){
+      return Carbon::parse( $date )->format('Y-m-d');
     }
     //return lists of ids for the current article
     public function getCategoriesListAttribute( ){
